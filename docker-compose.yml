@@ -19,6 +19,8 @@ services:
             - user-crud-service
         networks:
             - bridge-network
+        env_file:
+            -  .env
 
     auth-service:
         build:
@@ -30,6 +32,8 @@ services:
             - cache-service
         networks:
             - bridge-network
+        env_file:
+            -  .env
 
     redis:
         image: redis:6

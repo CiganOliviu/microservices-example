@@ -1,8 +1,11 @@
 import requests
+import os
 from django.core.cache import cache
 from django.http import JsonResponse
+from dotenv import load_dotenv
 
-CRUD_SERVICE_URL = "http://user-crud-service:8000/api/users/"
+load_dotenv()
+CRUD_SERVICE_URL = f"{os.getenv('CRUD_SERVICE')}/api/users/"
 
 
 def cached_user_list(request):
