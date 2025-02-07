@@ -1,0 +1,44 @@
+services:
+    user-crud-service:
+        build:
+            context: ./user_crud_service
+        container_name: user-crud-service
+        ports:
+            - "8000:8000"
+        networks:
+            - bridge-network
+
+    cache-service:
+        build:
+            context: ./cache_service
+        container_name: cache-service
+        ports:
+            - "8001:8001"
+        depends_on:
+            - redis
+            - user-crud-service
+        networks:
+            - bridge-network
+
+    auth-service:
+        build:
+            context: ./auth_service
+        container_name: auth-service
+        ports:
+            - "8002:8002"
+        depends_on:
+            - cache-service
+        networks:
+            - bridge-network
+
+    redis:
+        image: redis:6
+        container_name: redis-cache
+        ports:
+            - "6379:6379"
+        networks:
+            - bridge-network
+
+networks:
+    bridge-network:
+        driver: bridge
