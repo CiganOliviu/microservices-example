@@ -1,0 +1,4 @@
+Django==3.2.9
+requests==2.26.0
+djangorestframework==3.12.4
+whitenoise==5.3.0
